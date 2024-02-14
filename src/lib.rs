@@ -7,6 +7,7 @@ use robotics_lib::{
 };
 use rust_eze_spotlight::Spotlight;
 use rust_eze_tomtom::TomTom;
+use ui_lib::RunnableUi;
 
 pub struct Ai {
     ui: Box<dyn RunnableUi>,
