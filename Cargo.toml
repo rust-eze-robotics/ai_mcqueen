@@ -1,7 +1,7 @@
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [package]
-name = "ai_lib"
+name = "ai_mcqueen"
 authors = ["Guglielmo Boi", "Davide Andreolli", "Chiara Sabaini", "Aris Tomaselli"]
 version = "1.0.0"
 edition = "2021"
