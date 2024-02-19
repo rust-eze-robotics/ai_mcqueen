@@ -12,7 +12,7 @@ use ui_lib::RunnableUi;
 
 pub fn get_world_generator_parameters() -> WorldGeneratorParameters {
     WorldGeneratorParameters {
-        amount_of_teleports: Some(10.0),
+        amount_of_teleports: Some(5.0),
         contents_radii: ContentsRadii {
             trees_in_forest: 5,
             trees_in_hill: 5,
