@@ -12,6 +12,7 @@ use ui_lib::RunnableUi;
 
 pub fn get_world_generator_parameters() -> WorldGeneratorParameters {
     WorldGeneratorParameters {
+        time_progression_minutes: 60,
         contents_radii: ContentsRadii {
             trees_in_forest: 5,
             trees_in_hill: 5,
