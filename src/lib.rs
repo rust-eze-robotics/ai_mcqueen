@@ -2,7 +2,6 @@ use midgard::params::{ContentsRadii, WorldGeneratorParameters};
 use robotics_lib::{
     energy::Energy,
     event::events::Event,
-    interface::{go, robot_map},
     runner::{backpack::BackPack, Robot, Runnable},
     world::{coordinates::Coordinate, World},
 };
@@ -52,7 +51,7 @@ impl Ai {
                 Some(rust_eze_tomtom::plain::PlainContent::Tree),
             );
 
-            self.counter = 2;;
+            self.counter = 2;
         } else if self.counter == 2 {
             let _ = TomTom::go_to_tile(
                 self,
