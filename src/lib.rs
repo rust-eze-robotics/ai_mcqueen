@@ -1,3 +1,4 @@
+use midgard::params::{ContentsRadii, WorldGeneratorParameters};
 use robotics_lib::{
     energy::Energy,
     event::events::Event,
@@ -9,10 +10,24 @@ use rust_eze_spotlight::Spotlight;
 use rust_eze_tomtom::TomTom;
 use ui_lib::RunnableUi;
 
+pub fn get_world_generator_parameters() -> WorldGeneratorParameters {
+    WorldGeneratorParameters {
+        amount_of_teleports: Some(10.0),
+        contents_radii: ContentsRadii {
+            trees_in_forest: 5,
+            trees_in_hill: 5,
+            trees_in_mountain: 5,
+            bushes_in_plains: 5,
+            ..Default::default()
+        },
+        ..Default::default()
+    }
+}
+
 pub struct Ai {
     ui: Box<dyn RunnableUi>,
     robot: Robot,
-    first: bool,
+    counter: u32,
 }
 
 impl Ai {
@@ -20,26 +35,34 @@ impl Ai {
         Self {
             ui,
             robot: Robot::new(),
-            first: true,
+            counter: 0,
         }
     }
 
     pub fn run(&mut self, world: &mut World) {
-        if self.first {
-            self.first = false;
+        if self.counter == 0 {
+            let _ = Spotlight::illuminate(self, world, 15);
+            self.counter = 1;
+        } else if self.counter == 1 {
+            let _ = TomTom::go_to_tile(
+                self,
+                world,
+                false,
+                None,
+                Some(rust_eze_tomtom::plain::PlainContent::Tree),
+            );
 
-            Spotlight::illuminate(self, world, 7);
-
-            TomTom::go_to_tile(
+            self.counter = 2;;
+        } else if self.counter == 2 {
+            let _ = TomTom::go_to_tile(
                 self,
                 world,
                 false,
                 None,
                 Some(rust_eze_tomtom::plain::PlainContent::Bush),
             );
-        } else {
-            go(self, world, robotics_lib::interface::Direction::Down);
-            go(self, world, robotics_lib::interface::Direction::Right);
+
+            self.counter = 1;
         }
     }
 }
